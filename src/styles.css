@@ -1,0 +1,143 @@
+:root{
+  --bg:#f7f3ef; /* warm light */
+  --accent:#5b3a29; /* warmed brown accent */
+  --muted:#6b6b6b;
+  --text:#0b1220;
+}
+body{font-family:Inter,ui-sans-serif,system-ui,"Segoe UI",Roboto,Helvetica,Arial; background:var(--bg); margin:0}
+.site-header{background:transparent;backdrop-filter:saturate(120%) blur(6px)}
+.container{max-width:900px;margin:28px auto;padding:0 16px;width:100%;box-sizing:border-box;overflow-x:hidden}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+.nav-bar{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+.logo{font-weight:700;color:var(--text);text-decoration:none;font-size:18px;letter-spacing:1px;max-width: 10%;}
+.nav-links a{margin-left:18px;color:var(--muted);text-decoration:none;font-size:14px;letter-spacing:.6px;text-transform:uppercase}
+h1{color:var(--text)}
+p{color:var(--muted)}
+
+/* Hero */
+.hero{background:#fff;padding:56px 0;border-bottom:1px solid rgba(16,24,40,.04)}
+.hero-inner{display:flex;gap:28px;align-items:center}
+.hero-text{flex:1}
+.hero h1{font-size:28px;margin:0 0 8px}
+.lead{color:var(--muted);margin:0 0 16px}
+.hero-cta .btn{display:inline-block;padding:10px 14px;border-radius:6px;background:var(--accent);color:#fff;text-decoration:none;margin-right:8px}
+.hero-cta .btn.ghost{background:transparent;border:1px solid rgba(37,99,235,.12);color:var(--accent)}
+.hero-image{width:260px}
+.image-placeholder{height:160px;background:linear-gradient(135deg,#e2e8f0,#f8fafc);display:flex;align-items:center;justify-content:center;color:var(--muted);border-radius:8px}
+
+/* Portfolio */
+.portfolio{padding:40px 16px}
+.portfolio h2{margin-top:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;width:100%;max-width:100%;box-sizing:border-box;overflow-x:hidden}
+.card{background:#fff;padding:16px;border-radius:10px;box-shadow:0 6px 18px rgba(12,15,25,.04)}
+.card .thumb{height:120px;background:linear-gradient(90deg,#eef2ff,#fff);border-radius:6px;margin-bottom:8px}
+.card h3{margin:0 0 6px}
+.card p{margin:0 0 8px;color:var(--muted)}
+.link{color:var(--accent);text-decoration:none}
+
+/* About */
+.about{padding:32px 16px}
+
+/* Footer */
+.site-footer{padding:20px 0;background:#fff;border-top:1px solid rgba(16,24,40,.04);margin-top:36px}
+.footer-inner{display:flex;justify-content:space-between;align-items:center}
+.site-footer a{color:var(--muted);margin-left:12px;text-decoration:none}
+
+/* Variant styles to better match example site */
+.eyebrow{color:var(--accent);font-weight:600;font-size:13px;margin-bottom:8px}
+.hero-variant{background:#fff}
+.hero-variant-inner{display:flex;gap:40px;align-items:center;justify-content:space-between;padding:64px 0}
+.hero-variant-text{flex:1;max-width:640px}
+.hero-variant-text h1{font-size:42px;line-height:1.04;margin:6px 0 18px;color:var(--text)}
+.hero-variant-text .lead{font-size:18px;color:var(--muted);margin-bottom:20px}
+.hero-actions .btn.large{padding:12px 18px;font-weight:600}
+.hero-variant-media{width:420px}
+.hero-variant-media img{width:100%;height:auto;border-radius:12px;display:block}
+
+.portfolio-variant{padding:56px 16px}
+.portfolio-variant h2{font-size:28px;margin-bottom:16px}
+.portfolio-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;width:100%;max-width:100%;box-sizing:border-box;overflow-x:hidden}
+.portfolio-card{background:#fff;border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+.portfolio-thumb img{width:100%;height:220px;object-fit:cover;display:block}
+.portfolio-body{padding:12px}
+.portfolio-body h3{margin:0 0 6px;color:var(--text)}
+
+.missions-page .mission-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:18px;width:100%;max-width:100%;box-sizing:border-box;overflow-x:hidden}
+.missions-page .card{background:#fff;padding:14px;border-radius:10px}
+.donate-page .donate-actions{display:flex;gap:12px;margin-top:12px}
+.donate-page .small{color:var(--muted);margin-top:10px}
+
+.about-variant{padding:48px 16px}
+.about-grid{display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:center}
+.about-image img{width:100%;border-radius:10px}
+
+.contact-variant{padding:40px 16px}
+.contact-form{display:flex;flex-direction:column;gap:10px;max-width:520px}
+.contact-form input,.contact-form textarea{padding:10px;border:1px solid #e6edf3;border-radius:8px}
+
+@media (max-width:900px){
+  .hero-variant-inner{flex-direction:column}
+  .hero-variant-media{width:100%}
+  .portfolio-grid{grid-template-columns:1fr}
+  .about-grid{grid-template-columns:1fr}
+}
+
+/* Hero Container Styles */
+.home-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.hero-container {
+  padding: 80px 20px;
+  text-align: center;
+  background: linear-gradient(135deg, #f7f3ef 0%, #fff 100%);
+}
+
+.hero-headers {
+  margin-bottom: 24px;
+}
+
+.hero-header {
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.hero-copy {
+  font-size: 18px;
+  color: var(--muted);
+  max-width: 600px;
+  margin: 0 auto 32px;
+  line-height: 1.6;
+}
+
+.donate-button-container {
+  margin-top: 24px;
+}
+
+.donate-button {
+  display: inline-block;
+  padding: 14px 32px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.donate-button:hover {
+  background: #4a2f22;
+}
+
+@media (max-width: 768px) {
+  .hero-header {
+    font-size: 32px;
+  }
+  .hero-copy {
+    font-size: 16px;
+  }
+}
