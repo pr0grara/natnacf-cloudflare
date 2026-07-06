@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="container">
         <div className="footer-inner">
           <div className="footer-left">
-            <p>© {new Date().getFullYear()} NATNA Community Foundation TEST</p>
+            <p>© {new Date().getFullYear()} NATNA Community Foundation TESTING</p>
           </div>
           <nav className="footer-nav">
             <Link to="/">Home</Link>
