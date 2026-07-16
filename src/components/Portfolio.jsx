@@ -2,13 +2,13 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import groupPhoto from '../assets/website_photo_2.jpg'
 import communityPhoto from '../assets/website_photo_3.jpg'
-import landscape1 from '../assets/tigray_landscape_1.jpg'
+import classroom from '../assets/natna-ai-classroom1.jpg'
 import landscape2 from '../assets/tigray_landscape_2.jpg'
 
 const items = [
-    { id: 1, title: 'Project — Education Access Program', desc: [`Provide school supplies, uniforms, and tuition assistance.`, 'Partner with schools to improve infrastructure and access to learning materials.', 'NATNA AI — our offline education system that builds resilient access to learning in communities without internet.'], image: groupPhoto, alt: 'NATNA team members with children and families, showcasing our educational support programs in action', link: '/projects/natna-ai' },
-    { id: 2, title: 'Project — Psychosocial & Extracurricular Programs', desc: ['Safe spaces for creative expression, art, sports, and leadership workshops.', 'Trauma-informed activities for children affected by conflict or displacement.'], image: communityPhoto, alt: 'Community gathering showing children engaged in activities with NATNA team member, demonstrating our psychosocial support programs', link: null },
-    { id: 3, title: 'Program — Family Mutual Aid Initiative', desc: ['Provide food packages, hygiene kits, and emergency relief to families.', 'Micro-grants or small stipends to reduce the economic pressure that forces children out of school.'], image: landscape1, alt: 'Tigray farmland landscape showing agricultural fields', link: null },
+    { id: 1, title: 'Project — Education Access Program', desc: [`Provide school supplies, uniforms, and tuition assistance.`, 'Partner with schools to improve infrastructure and access to learning materials.', 'NATNA AI — our offline education system that builds resilient access to learning in communities without internet.'], image: classroom, alt: 'Students in classroom learning with NATNA AI', link: '/projects/natna-ai' },
+    { id: 2, title: 'Program — Family Mutual Aid Initiative', desc: ['Provide food packages, hygiene kits, and emergency relief to families.', 'Micro-grants or small stipends to reduce the economic pressure that forces children out of school.'], image: groupPhoto, alt: 'NATNA team with families in Tigray', link: '/projects/mutual-aid' },
+    { id: 3, title: 'Project — Psychosocial & Extracurricular Programs', desc: ['Safe spaces for creative expression, art, sports, and leadership workshops.', 'Trauma-informed activities for children affected by conflict or displacement.'], image: communityPhoto, alt: 'Community gathering showing children engaged in activities with NATNA team member, demonstrating our psychosocial support programs', link: null },
     { id: 4, title: 'Program — Advocacy & Awareness', desc: ['Advocate for child protection, educational rights, and rehabilitation of schools.', 'Collaborate with UN agencies, NGOs, and community leaders to influence policy and raise awareness globally.'], image: landscape2, alt: 'Tigray landscape with traditional cactus trees', link: null }
 ]
 

@@ -143,7 +143,8 @@ html {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   scroll-behavior: smooth;
-  overflow-x: hidden;
+  // overflow-x: hidden breaks position: sticky descendants. Use clip instead (same effect, no new scrolling context).
+  overflow-x: clip;
   max-width: 100vw;
 }
 
@@ -154,7 +155,7 @@ body {
   font-size: font-size(sm);
   line-height: 1.6;
   letter-spacing: -0.01em;
-  overflow-x: hidden;
+  overflow-x: clip;
   max-width: 100vw;
 }
 
@@ -755,6 +756,52 @@ p {
   }
 }
 
+// Home container
+.home-container {
+  max-width: $container-max;
+  margin: 0 auto;
+  padding: 0 space(5);
+  overflow-x: hidden;
+
+  @media (max-width: map-get($breakpoints, md)) {
+    padding: 0 space(4);
+  }
+}
+
+// Instagram follow section
+.ig-follow-section {
+  text-align: center;
+  padding: space(8) 0;
+
+  @media (max-width: map-get($breakpoints, sm)) {
+    padding: space(4) 0;
+  }
+}
+
+.ig-follow-link {
+  @extend .btn;
+  padding: space(4) space(8);
+  font-size: font-size(md);
+  border-radius: 10px;
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  color: white;
+  border: none;
+
+  &:hover {
+    opacity: 0.9;
+    color: white;
+  }
+}
+
+.footer-ig {
+  display: inline-flex;
+  align-items: center;
+
+  &:hover {
+    color: #e6683c;
+  }
+}
+
 .btn-ghost {
   @extend .btn;
   background: transparent;
@@ -938,51 +985,104 @@ p {
   background: color(primary-bg);
 }
 
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: space(12);
-  align-items: center;
-  
+// ── About page shell — single column, consistent rhythm across blocks ──
+.about-shell {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: space(8) space(6) space(12);
+
   @media (max-width: map-get($breakpoints, md)) {
-    grid-template-columns: 1fr;
-    gap: space(8);
+    padding: space(6) space(5) space(10);
   }
 }
 
-.about-image {
-  position: relative;
-  
-  img {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-    border-radius: 16px;
-    box-shadow: shadow(xl);
-    transition: transform 0.3s ease;
-    
-    &:hover {
-      transform: scale(1.02);
-    }
-  }
-  
-  @media (max-width: map-get($breakpoints, md)) {
-    img {
-      height: 300px;
-    }
-  }
+.about-eyebrow {
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 600;
+  color: color(accent-primary);
+  margin: 0 0 space(3);
+  text-align: center;
 }
 
-.about-content {
-  h2 {
+.about-pagetitle {
+  font-size: clamp(36px, 4.5vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-weight: 800;
+  color: color(text-primary);
+  margin: 0 0 space(8);
+  text-align: center;
+
+  @media (max-width: map-get($breakpoints, sm)) {
     margin-bottom: space(6);
   }
-  
-  h3 {
-    color: color(accent-primary);
-    margin-bottom: space(4);
-    font-size: font-size(lg);
+}
+
+.about-feature-image {
+  margin: 0 0 space(16);
+
+  img {
+    width: 100%;
+    height: 360px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: shadow(xl);
+    display: block;
   }
+
+  @media (max-width: map-get($breakpoints, md)) {
+    margin-bottom: space(10);
+
+    img {
+      height: 260px;
+    }
+  }
+}
+
+// ── Unified content blocks — same rhythm for every text section ────────
+.about-block {
+  margin-bottom: space(20);
+  text-align: center;
+
+  &:last-of-type {
+    margin-bottom: space(8);
+  }
+
+  h2 {
+    font-size: clamp(28px, 3vw, 36px);
+    margin: 0 0 space(6);
+    letter-spacing: -0.015em;
+  }
+
+  p {
+    font-size: 17px;
+    line-height: 1.75;
+    color: color(text-secondary);
+    margin: 0 auto space(5);
+    max-width: 640px;
+
+    @media (max-width: map-get($breakpoints, sm)) {
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: map-get($breakpoints, md)) {
+    margin-bottom: space(14);
+  }
+}
+
+.about-lede {
+  font-size: 19px !important;
+  font-weight: 500;
+  color: color(text-primary) !important;
+  line-height: 1.55 !important;
+  margin-bottom: space(7) !important;
+}
+
+.about-block-cta {
+  margin-top: space(8);
 }
 
 // ================================
@@ -1160,7 +1260,20 @@ p {
   @extend .section;
   background: color(secondary-bg);
   text-align: center;
-  
+
+  .contact-hero-image {
+    max-width: 800px;
+    margin: space(10) auto space(8) auto;
+    border-radius: 12px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  }
+
   p {
     max-width: 700px;
     margin: 0 auto space(12) auto;
@@ -1228,40 +1341,54 @@ p {
 // ================================
 
 .site-footer {
-  padding: space(8) 0;
+  padding: space(8) space(4);
   background: color(primary-bg);
   border-top: 1px solid color(border-light);
-  
+
   .footer-inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
+    max-width: $container-max;
+    margin: 0 auto;
+
     @media (max-width: map-get($breakpoints, md)) {
       flex-direction: column;
       gap: space(4);
       text-align: center;
     }
   }
-  
+
+  .footer-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: space(2) space(4);
+  }
+
   p {
     color: color(text-muted);
     margin: 0;
     font-size: font-size(sm);
+
+    @media (max-width: map-get($breakpoints, md)) {
+      font-size: font-size(xs);
+    }
   }
-  
+
   a {
     color: color(text-muted);
-    margin-left: space(6);
+    margin: 0;
     text-decoration: none;
+    font-size: font-size(sm);
     transition: color 0.3s ease;
-    
+
     &:hover {
       color: color(accent-primary);
     }
-    
+
     @media (max-width: map-get($breakpoints, md)) {
-      margin: 0 space(3);
+      font-size: font-size(xs);
     }
   }
 }
@@ -1416,7 +1543,8 @@ p {
   box-sizing: border-box;
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
+  // overflow-x: hidden creates a scroll container that breaks position: sticky descendants. Use clip instead.
+  overflow-x: clip;
   overflow-wrap: break-word;
   word-wrap: break-word;
   hyphens: none;
@@ -1585,19 +1713,79 @@ html {
   gap: space(3);
   justify-content: center;
   align-items: center;
-  
+
   .btn.large {
     min-width: 140px;
   }
-  
+
   @media (max-width: map-get($breakpoints, sm)) {
     flex-direction: column;
     gap: space(2);
-    
+
     .btn.large {
       width: 100%;
       max-width: 200px;
     }
+  }
+}
+
+.hero-cta--stacked {
+  flex-direction: column;
+  gap: space(3);
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+
+  .btn.large,
+  .btn-secondary.large {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+}
+
+.hero-donate-featured {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: space(2);
+  width: 100%;
+  padding: space(4) space(6);
+  background: color(accent-primary);
+  color: white;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 700;
+  box-shadow: shadow(md);
+  transition: transform 0.15s ease, background 0.15s ease;
+  white-space: nowrap;
+
+  &:hover {
+    background: color(accent-hover);
+    color: white;
+    transform: translateY(-1px);
+  }
+
+  &__amt {
+    font-size: font-size(lg);
+    line-height: 1;
+  }
+
+  &__label {
+    font-size: font-size(sm);
+    opacity: 0.92;
+  }
+}
+
+.hero-donate-more {
+  font-size: font-size(sm);
+  color: color(text-muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: color(accent-primary);
   }
 }
 
@@ -2295,8 +2483,8 @@ html {
   
   .donate-btn {
     flex: 1;
-    padding: space(3) space(6);
-    font-size: font-size(lg);
+    padding: space(3) space(4);
+    font-size: font-size(md);
     font-weight: 600;
     border: 2px solid color(text-primary);
     border-radius: 10px;
@@ -2305,6 +2493,7 @@ html {
     text-decoration: none;
     transition: all 0.2s ease;
     text-align: center;
+    white-space: nowrap;
     
     &:hover {
       border-color: #3b5bdb;
@@ -2341,21 +2530,26 @@ html {
   overflow-x: hidden;
   max-width: 100vw;
   box-sizing: border-box;
-  
+
   .container {
     width: 100%;
     max-width: $container-max;
     margin: 0 auto;
     padding: 0 space(6);
     box-sizing: border-box;
-    
+    overflow-x: hidden;
+
     @media (max-width: map-get($breakpoints, md)) {
       padding: 0 space(4);
     }
-    
+
     @media (max-width: map-get($breakpoints, sm)) {
-      padding: 0 space(4);
+      padding: 0 space(3);
     }
+  }
+
+  @media (max-width: map-get($breakpoints, md)) {
+    padding: space(12) 0;
   }
 }
 
@@ -2368,10 +2562,10 @@ html {
   max-width: 100%;
   box-sizing: border-box;
   overflow-x: hidden;
-  
+
   @media (max-width: map-get($breakpoints, md)) {
     grid-template-columns: 1fr;
-    gap: space(12);
+    gap: space(8);
     text-align: center;
   }
 }
@@ -2380,26 +2574,27 @@ html {
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-  
+  overflow: hidden;
+
   h2 {
     font-size: font-size(3xl);
     font-weight: 700;
     color: color(text-primary);
     margin-bottom: space(2);
-    
-    @media (max-width: map-get($breakpoints, sm)) {
-      font-size: font-size(2xl);
+
+    @media (max-width: map-get($breakpoints, md)) {
+      font-size: font-size(xl);
     }
   }
-  
+
   .impact-subtitle {
     color: color(text-secondary);
     margin-bottom: space(8);
     font-size: font-size(base);
-    
-    @media (max-width: map-get($breakpoints, sm)) {
+
+    @media (max-width: map-get($breakpoints, md)) {
       font-size: font-size(sm);
-      margin-bottom: space(6);
+      margin-bottom: space(4);
     }
   }
 }
@@ -2411,18 +2606,12 @@ html {
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-  overflow-x: hidden;
-  
+  overflow: hidden;
+
   @media (max-width: map-get($breakpoints, md)) {
     grid-template-columns: repeat(2, 1fr);
-    gap: space(4);
-    justify-items: center;
-    padding: 0 space(2);
-  }
-  
-  @media (max-width: map-get($breakpoints, sm)) {
     gap: space(3);
-    padding: 0 space(1);
+    padding: 0;
   }
 }
 
@@ -2443,12 +2632,12 @@ html {
     line-height: 1.1;
     overflow-wrap: break-word;
     word-wrap: break-word;
-    
-    @media (max-width: map-get($breakpoints, sm)) {
-      font-size: font-size(2xl);
+
+    @media (max-width: map-get($breakpoints, md)) {
+      font-size: font-size(xl);
     }
   }
-  
+
   .stat-lbl {
     display: block;
     font-size: font-size(sm);
@@ -2458,16 +2647,10 @@ html {
     margin-top: space(1);
     overflow-wrap: break-word;
     word-wrap: break-word;
-    hyphens: none;
     max-width: 100%;
-    
+
     @media (max-width: map-get($breakpoints, md)) {
-      font-size: font-size(xs);
-      letter-spacing: 0.01em;
-    }
-    
-    @media (max-width: map-get($breakpoints, sm)) {
-      font-size: font-size(xs);
+      font-size: 0.7rem;
       letter-spacing: 0;
     }
   }
@@ -2482,11 +2665,16 @@ html {
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-  
-  @media (max-width: map-get($breakpoints, sm)) {
+  overflow: hidden;
+
+  @media (max-width: map-get($breakpoints, md)) {
     padding: space(6);
     border-radius: 12px;
-    margin: 0 auto;
+  }
+
+  @media (max-width: map-get($breakpoints, sm)) {
+    padding: space(5) space(4);
+    border-radius: 12px;
   }
   
   h2 {
@@ -2494,20 +2682,20 @@ html {
     font-weight: 700;
     color: color(text-primary);
     margin-bottom: space(2);
-    
-    @media (max-width: map-get($breakpoints, sm)) {
-      font-size: font-size(xl);
+
+    @media (max-width: map-get($breakpoints, md)) {
+      font-size: font-size(lg);
     }
   }
-  
+
   .donate-subtitle {
     color: color(text-secondary);
     margin-bottom: space(6);
     font-size: font-size(base);
-    
-    @media (max-width: map-get($breakpoints, sm)) {
-      font-size: font-size(sm);
-      margin-bottom: space(4);
+
+    @media (max-width: map-get($breakpoints, md)) {
+      font-size: font-size(xs);
+      margin-bottom: space(3);
     }
   }
 }
@@ -2519,16 +2707,15 @@ html {
   margin-bottom: space(4);
   width: 100%;
   box-sizing: border-box;
-  
-  @media (max-width: map-get($breakpoints, sm)) {
+
+  @media (max-width: map-get($breakpoints, md)) {
     gap: space(2);
-    flex-wrap: nowrap;
   }
 }
 
 .donate-amount {
-  padding: space(3) space(6);
-  font-size: font-size(lg);
+  padding: space(3) space(4);
+  font-size: font-size(md);
   font-weight: 600;
   border: 2px solid #e9ecef;
   border-radius: 10px;
@@ -2539,11 +2726,12 @@ html {
   min-width: 90px;
   text-align: center;
   box-sizing: border-box;
-  
-  @media (max-width: map-get($breakpoints, sm)) {
-    padding: space(3) space(4);
-    font-size: font-size(md);
-    min-width: 70px;
+  white-space: nowrap;
+
+  @media (max-width: map-get($breakpoints, md)) {
+    padding: space(2) space(3);
+    font-size: font-size(sm);
+    min-width: 0;
     flex: 1;
   }
   
@@ -2636,54 +2824,229 @@ html {
 
 .donate-form-desktop {
   display: block;
-  
+
   @media (max-width: map-get($breakpoints, md)) {
     display: none;
   }
 }
 
+.stripe-donate-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: space(4);
+}
+
+// Mutual Aid Initiative Cards
+.aid-initiatives {
+  display: flex;
+  flex-direction: column;
+  gap: space(8);
+  margin: space(10) 0;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.aid-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: space(8);
+  align-items: center;
+  padding: space(8);
+  background: color(secondary-bg);
+  border-radius: 16px;
+
+  &:nth-child(even) {
+    direction: rtl;
+
+    > * {
+      direction: ltr;
+    }
+  }
+
+  &.no-video {
+    grid-template-columns: 1fr;
+    text-align: center;
+
+    .aid-stat {
+      justify-content: center;
+      margin-bottom: space(2);
+    }
+  }
+
+  .aid-gallery {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: space(4);
+    margin-top: space(4);
+
+    video {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (max-width: map-get($breakpoints, sm)) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: map-get($breakpoints, md)) {
+    grid-template-columns: 1fr;
+    padding: space(6);
+
+    &:nth-child(even) {
+      direction: ltr;
+    }
+  }
+}
+
+.aid-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: space(1);
+  margin-bottom: space(3);
+  padding: space(1) space(3);
+  background: rgba(37, 99, 235, 0.08);
+  border-radius: 20px;
+}
+
+.aid-stat-number {
+  font-size: font-size(sm);
+  font-weight: 600;
+  color: color(accent-primary);
+}
+
+.aid-stat-label {
+  font-size: font-size(sm);
+  color: color(accent-primary);
+}
+
+.aid-left {
+  h3 {
+    font-size: font-size(2xl);
+    margin-bottom: space(4);
+    color: color(text-primary);
+  }
+
+  p {
+    font-size: font-size(md);
+    color: color(text-secondary);
+    line-height: 1.8;
+  }
+}
+
+.aid-image {
+  img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.aid-videos {
+  display: flex;
+  flex-direction: column;
+  gap: space(3);
+
+  video {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+}
+
+// ================================
+// Where Tigray Is — vertical stack inside about-block--location
+// ================================
+.tigray-location-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: space(6);
+  padding: space(6);
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 12px;
+}
+
+.tigray-location-map {
+  width: 100%;
+  max-width: 380px;
+
+  svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+.tigray-location-text {
+  font-size: 16px !important;
+  line-height: 1.65 !important;
+  color: color(text-secondary);
+  margin: 0 !important;
+  max-width: 460px;
+  text-align: center;
+}
+
+// ================================
 // Team Bios Section
+// ================================
 .team-section {
   margin-top: space(16);
-  
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: space(6);
+  padding-right: space(6);
+
   h2 {
     text-align: center;
     margin-bottom: space(10);
+    font-size: font-size(4xl);
+
+    @media (max-width: map-get($breakpoints, sm)) {
+      font-size: font-size(3xl);
+    }
   }
 }
 
 .team-grid {
-  display: flex;
-  flex-direction: column;
-  gap: space(10);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: space(8);
+
+  @media (max-width: map-get($breakpoints, md)) {
+    grid-template-columns: 1fr;
+    gap: space(10);
+    max-width: 480px;
+    margin: 0 auto;
+  }
 }
 
 .team-member {
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: space(8);
-  align-items: start;
-  
-  @media (max-width: map-get($breakpoints, md)) {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: space(4);
 }
 
 .team-photo {
   img {
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
     object-fit: cover;
     box-shadow: shadow(lg);
   }
-  
-  @media (max-width: map-get($breakpoints, md)) {
-    display: flex;
-    justify-content: center;
-  }
 }
+
+// Per-member crop adjustments — kept as a hook in case other photos need composition tweaks.
+// Aram's photo is pre-cropped at the source (assets/aram_centered.jpg) — face geometrically centered.
 
 .team-photo-placeholder {
   width: 200px;
@@ -2706,28 +3069,62 @@ html {
 }
 
 .team-info {
+  width: 100%;
+
   h3 {
-    font-size: font-size(2xl);
-    margin-bottom: space(4);
+    font-size: font-size(xl);
+    margin-bottom: space(3);
     color: color(text-primary);
-    
+
     @media (max-width: map-get($breakpoints, sm)) {
-      font-size: font-size(xl);
+      font-size: font-size(lg);
     }
   }
-  
+
   p {
-    font-size: font-size(md);
-    line-height: 1.7;
+    font-size: font-size(sm);
+    line-height: 1.65;
     color: color(text-secondary);
-    margin-bottom: space(4);
-    
-    @media (max-width: map-get($breakpoints, sm)) {
-      font-size: font-size(sm);
-    }
-    
+    margin-bottom: space(3);
+
     &:last-child {
       margin-bottom: 0;
+    }
+  }
+
+  details {
+    margin-top: space(2);
+
+    summary {
+      cursor: pointer;
+      color: color(accent-primary);
+      font-size: font-size(sm);
+      font-weight: 600;
+      list-style: none;
+      padding: space(1) 0;
+      transition: opacity 0.15s ease;
+
+      &::-webkit-details-marker {
+        display: none;
+      }
+
+      &::after {
+        content: " ↓";
+        display: inline-block;
+        transition: transform 0.2s ease;
+      }
+
+      &:hover {
+        opacity: 0.75;
+      }
+    }
+
+    &[open] summary::after {
+      content: " ↑";
+    }
+
+    p {
+      margin-top: space(3);
     }
   }
 }
@@ -3112,4 +3509,1016 @@ html {
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+// ================================
+// Donate Page — Pricing Table
+// ================================
+
+.dn-page {
+  max-width: $container-max;
+  margin: 0 auto;
+  padding: 0 space(4) space(16);
+  overflow-x: hidden;
+
+  @media (max-width: map-get($breakpoints, md)) {
+    padding: 0 space(4) space(10);
+  }
+}
+
+// Hero
+.dn-hero {
+  text-align: center;
+  padding: space(16) 0 0;
+}
+
+.dn-hero__title {
+  font-size: font-size(3xl);
+  font-weight: 700;
+  color: color(text-primary);
+  margin: 0 0 space(3);
+  letter-spacing: -0.5px;
+}
+
+.dn-hero__sub {
+  font-size: font-size(md);
+  color: color(text-secondary);
+  max-width: 500px;
+  margin: 0 auto space(4);
+  line-height: 1.6;
+}
+
+// Impact pills
+.dn-impact {
+  display: flex;
+  justify-content: center;
+  gap: space(3);
+}
+
+.dn-impact__card {
+  background: color(surface);
+  border-radius: 12px;
+  padding: space(4) space(6);
+  text-align: center;
+  box-shadow: shadow(sm);
+  min-width: 160px;
+}
+
+.dn-impact__amt {
+  display: block;
+  font-size: font-size(lg);
+  font-weight: 700;
+  color: color(accent-primary);
+  margin-bottom: space(1);
+}
+
+.dn-impact__desc {
+  font-size: font-size(xs);
+  color: color(text-muted);
+  line-height: 1.4;
+}
+
+// Quick-give $5/month button
+.dn-quick-give {
+  max-width: 480px;
+  margin: 0 auto space(8);
+  text-align: center;
+
+  &__btn {
+    display: inline-flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: space(1);
+    padding: space(3) space(6);
+    background: color(accent-primary);
+    color: white;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 700;
+    box-shadow: shadow(md);
+    transition: transform 0.15s ease, background 0.15s ease;
+    white-space: nowrap;
+
+    &:hover {
+      background: color(accent-hover);
+      transform: translateY(-1px);
+    }
+  }
+
+  &__amt {
+    font-size: font-size(lg);
+    line-height: 1;
+  }
+
+  &__label {
+    font-size: font-size(sm);
+    opacity: 0.9;
+  }
+
+  &__hint {
+    margin: space(4) 0 0;
+    font-size: font-size(sm);
+    color: color(text-muted);
+  }
+}
+
+// Stripe pricing table
+.dn-pricing {
+  margin-bottom: space(12);
+}
+
+// Bottom grid
+.dn-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: space(8);
+  align-items: start;
+
+  &__media img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+    box-shadow: shadow(md);
+  }
+
+  &__side {
+    display: flex;
+    flex-direction: column;
+    gap: space(6);
+  }
+
+  &__img {
+    width: 100%;
+    border-radius: 12px;
+    display: block;
+    box-shadow: shadow(md);
+  }
+}
+
+// Zelle
+.dn-zelle {
+  background: color(surface);
+  border-radius: 12px;
+  padding: space(6);
+  text-align: center;
+  box-shadow: shadow(sm);
+  max-width: 480px;
+  margin: 0 auto space(12);
+
+  &__label {
+    margin: 0 0 space(3);
+    font-size: font-size(sm);
+    color: color(text-muted);
+  }
+}
+
+// Your Impact section
+.dn-impact-section {
+  max-width: 640px;
+  margin: 0 auto space(12);
+
+  &__title {
+    font-size: font-size(xl);
+    font-weight: 700;
+    color: color(text-primary);
+    margin: 0 0 space(4);
+  }
+
+  &__card {
+    background: color(surface);
+    border-radius: 12px;
+    padding: space(5) space(6);
+    margin-bottom: space(4);
+    box-shadow: shadow(sm);
+
+    p {
+      margin: 0;
+      font-size: font-size(sm);
+      color: color(text-secondary);
+      line-height: 1.6;
+    }
+  }
+
+  &__amt {
+    display: block;
+    font-size: font-size(lg);
+    font-weight: 700;
+    color: color(accent-primary);
+    margin-bottom: space(2);
+  }
+}
+
+// Instagram on donate page
+.dn-ig {
+  text-align: center;
+  margin-bottom: space(12);
+}
+
+// Tax note
+.dn-tax {
+  text-align: center;
+  color: color(text-muted);
+  font-size: font-size(xs);
+  margin-top: space(12);
+}
+
+// Responsive
+@media (max-width: map-get($breakpoints, md)) {
+  .dn-hero {
+    padding: space(10) 0 0;
+  }
+
+  .dn-hero__title {
+    font-size: font-size(2xl);
+  }
+
+  .dn-hero__sub {
+    font-size: font-size(sm);
+    margin-bottom: space(4);
+  }
+
+  .dn-impact {
+    gap: space(2);
+  }
+
+  .dn-impact__card {
+    padding: space(3) space(3);
+    min-width: 0;
+    flex: 1;
+  }
+
+  .dn-impact__amt {
+    font-size: font-size(md);
+  }
+
+  .dn-impact__desc {
+    font-size: 0.7rem;
+  }
+
+  .dn-pricing {
+    margin-bottom: space(8);
+  }
+
+  .dn-bottom {
+    grid-template-columns: 1fr;
+    gap: space(6);
+
+    &__media img {
+      height: 240px;
+    }
+  }
+
+  .dn-impact-section {
+    margin: 0 auto space(8);
+  }
+
+  .dn-impact-section__card {
+    padding: space(4) space(4);
+  }
+
+  .dn-ig {
+    margin-bottom: space(8);
+  }
+
+  .dn-zelle {
+    margin-bottom: space(8);
+  }
+}
+
+// ================================
+// WHY TIGRAY — scrollytelling page
+// ================================
+.why-tigray {
+  background: #0a0e1a;
+  color: #e8eaf0;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  // Break out of <main class="container">'s horizontal padding so the dark fill goes
+  // edge-to-edge instead of leaving white side bars from the body background.
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
+}
+
+// ── Hero with photo background ───────────────────────────────────────
+.why-tigray-hero {
+  position: relative;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: space(20) space(6);
+  overflow: hidden;
+
+  @media (max-width: map-get($breakpoints, md)) {
+    min-height: 88vh;
+    padding: space(16) space(5);
+  }
+}
+
+.why-tigray-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, rgba(10, 14, 26, 0.55) 0%, rgba(10, 14, 26, 0.85) 60%, rgba(10, 14, 26, 0.96) 100%),
+    linear-gradient(180deg, rgba(10, 14, 26, 0.35) 0%, rgba(10, 14, 26, 0.7) 60%, rgba(10, 14, 26, 1) 100%);
+  z-index: 0;
+}
+
+.why-tigray-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  width: 100%;
+}
+
+.why-tigray-eyebrow {
+  letter-spacing: 4px;
+  font-size: 12px;
+  color: #f4685a;
+  font-weight: 600;
+  margin: 0 0 space(5);
+  text-transform: uppercase;
+}
+
+.why-tigray h1 {
+  font-size: clamp(56px, 8.5vw, 120px);
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 space(8);
+
+  @media (max-width: map-get($breakpoints, md)) {
+    font-size: clamp(48px, 12vw, 72px);
+    margin-bottom: space(6);
+  }
+}
+
+.why-tigray-lede {
+  font-size: clamp(18px, 1.6vw, 22px);
+  line-height: 1.55;
+  color: #d6d9e2;
+  margin: 0 auto space(12);
+  max-width: 560px;
+
+  @media (max-width: map-get($breakpoints, sm)) {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+}
+
+.why-tigray-scroll-hint {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: space(3);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.why-tigray-scroll-line {
+  width: 1px;
+  height: 56px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), transparent);
+  animation: scroll-hint-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes scroll-hint-pulse {
+  0%, 100% { transform: scaleY(0.6); transform-origin: top; opacity: 0.4; }
+  50%      { transform: scaleY(1);    transform-origin: top; opacity: 1; }
+}
+
+// ── Omna tribute — quiet card between hero and scrollytelling ───────
+.omna-tribute {
+  padding: space(20) space(6);
+  display: flex;
+  justify-content: center;
+
+  @media (max-width: map-get($breakpoints, md)) {
+    padding: space(12) space(5);
+  }
+}
+
+.omna-tribute-inner {
+  max-width: 680px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-left: 3px solid #c83d2e;
+  border-radius: 4px;
+  padding: space(7) space(8);
+
+  @media (max-width: map-get($breakpoints, sm)) {
+    padding: space(6);
+  }
+
+  .omna-tribute-eyebrow {
+    letter-spacing: 3px;
+    font-size: 11px;
+    color: #c83d2e;
+    font-weight: 700;
+    margin: 0 0 space(3);
+    text-transform: uppercase;
+  }
+
+  .omna-tribute-body {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #c2c7d3;
+    margin: 0;
+
+    a {
+      color: #fff;
+      text-decoration: underline;
+      text-decoration-color: rgba(255, 255, 255, 0.4);
+      text-underline-offset: 3px;
+
+      &:hover {
+        text-decoration-color: #fff;
+      }
+    }
+  }
+}
+
+// Scrollytelling layout — classic side-by-side: sticky graphic + scrolling narrative pulled up to overlap.
+.scrollytelling {
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+
+  @media (max-width: map-get($breakpoints, md)) {
+    max-width: 100%;
+  }
+}
+
+.scrollytelling-graphic {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 58%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: space(8) space(6);
+  z-index: 1;
+
+  @media (max-width: map-get($breakpoints, md)) {
+    width: 100%;
+    // Pin BELOW the fixed site header (height: space(24) = 96px) so the map is fully visible.
+    // Without this offset the top 96px of the map slides under the header and "half disappears".
+    top: space(24);
+    // Size to content (map + year pill). A fixed vh height either truncates the pill on
+    // iPhone SE or leaves dead space on bigger phones — both eat real estate the
+    // narrative needs.
+    height: auto;
+    padding: space(3) space(4);
+    background: #0a0e1a;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.6);
+    z-index: 5;
+  }
+}
+
+.sticky-graphic {
+  // Now identical to .scrollytelling-graphic; kept as a class for the inner content wrapper.
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 760px;
+}
+
+.tigray-map {
+  position: relative;
+  width: 100%;
+  max-width: 760px;
+  aspect-ratio: 4 / 3;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 28px 56px rgba(0, 0, 0, 0.5);
+  background: #0f1322;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+  @media (max-width: map-get($breakpoints, md)) {
+    max-width: 100%;
+    aspect-ratio: 4 / 3;
+  }
+}
+
+.tigray-map-canvas {
+  width: 100%;
+  height: 100%;
+  // Attribution control disabled in JS — credits are rendered as a static line in the page footer.
+}
+
+.tigray-map-external {
+  position: absolute;
+  inset: auto 16px 16px 16px;
+  background: rgba(15, 19, 34, 0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: space(3) space(4);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  .tigray-map-external-eyebrow {
+    color: #a4afc1;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .tigray-map-external-place {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+  }
+}
+
+.active-year {
+  // Always absolute so the pill never participates in the stage's flex flow
+  // (which would stretch it to match the map's height).
+  position: absolute;
+  // Long date labels (e.g. "Jul 2021–Nov 2022") were wrapping mid-pill on desktop because
+  // of the 0.4em letter-spacing. Pin to one line and let the pill grow horizontally instead.
+  white-space: nowrap;
+  font-weight: 700;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 3;
+
+  // Desktop: centered just below the map.
+  left: 50%;
+  bottom: -56px;
+  transform: translateX(-50%);
+  font-size: 22px;
+  letter-spacing: 0.4em;
+  padding: space(2) space(5);
+
+  @media (max-width: map-get($breakpoints, md)) {
+    // Mobile: small overlay anchored to the bottom-right of the map itself so we
+    // don't burn a separate row of vertical space on the year display.
+    left: auto;
+    transform: none;
+    right: space(3);
+    bottom: space(3);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    padding: 4px 10px;
+    background: rgba(10, 14, 26, 0.78);
+    border-color: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(6px);
+  }
+}
+
+.scrollytelling-narrative {
+  // Pull narrative up to overlap the sticky graphic, then offset its content to the right column.
+  margin-top: -100vh;
+  padding: 30vh space(8) 12vh 58%;
+  position: relative;
+  z-index: 2;
+
+  @media (max-width: map-get($breakpoints, md)) {
+    margin-top: 0;
+    padding: space(8) space(5) 8vh;
+  }
+}
+
+// Steps
+.step {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: space(12);
+  max-width: 460px;
+  margin-left: auto;
+  margin-right: 0;
+  padding-left: space(6);
+  border-left: 1px solid rgba(255, 255, 255, 0.06);
+  transition: opacity 0.4s ease, border-color 0.4s ease;
+
+  &.is-active {
+    border-left-color: rgba(244, 104, 90, 0.5);
+  }
+
+  @media (max-width: map-get($breakpoints, md)) {
+    // Top-align content with padding so the title sits clear of the sticky map's bottom edge
+    justify-content: flex-start;
+    min-height: 70vh;
+    padding-top: space(8);
+    margin-bottom: space(4);
+    margin-right: auto;
+    padding-left: space(4);
+    max-width: 100%;
+  }
+}
+
+.step.is-active {
+  // motion.div handles the visual fade; this is the structural anchor
+}
+
+.step-category {
+  letter-spacing: 2.4px;
+  font-size: 11px;
+  font-weight: 700;
+  margin: 0 0 space(3);
+  color: #6c7385;
+  text-transform: uppercase;
+}
+
+.step-date {
+  font-size: 14px;
+  font-weight: 600;
+  color: #b9bdc9;
+  margin: 0 0 space(4);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.05em;
+}
+
+.step-title {
+  font-size: clamp(28px, 3.4vw, 42px);
+  line-height: 1.18;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 space(5);
+  letter-spacing: -0.015em;
+
+  @media (max-width: map-get($breakpoints, md)) {
+    font-size: clamp(24px, 5.5vw, 30px);
+    margin-bottom: space(4);
+  }
+}
+
+.step-body {
+  font-size: 18px;
+  line-height: 1.65;
+  color: #c2c7d3;
+  margin: 0;
+
+  @media (max-width: map-get($breakpoints, md)) {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+}
+
+// Per-category accents
+.step--aggression .step-category   { color: #d68a7e; }
+.step--political .step-category    { color: #7eb1d6; }
+.step--humanitarian .step-category { color: #d6c87e; }
+.step--genocide .step-category     { color: #f4685a; }
+.step--milestone .step-category    { color: #7ed68f; }
+
+// Natna's contribution highlight
+.step--natna {
+  border-left: 3px solid #f5d96b;
+  padding-left: space(6);
+}
+
+.step-natna-badge {
+  display: inline-block;
+  background: rgba(245, 217, 107, 0.14);
+  color: #f5d96b;
+  letter-spacing: 1.5px;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 2px;
+  margin-bottom: space(4);
+  text-transform: uppercase;
+}
+
+// Closing CTA
+.why-tigray-cta {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: space(10) space(6) space(24);
+  text-align: center;
+
+  h2 {
+    font-size: clamp(32px, 4vw, 56px);
+    color: #fff;
+    margin-bottom: space(6);
+    letter-spacing: -0.01em;
+    font-weight: 700;
+  }
+
+  p {
+    font-size: font-size(lg);
+    color: #c2c7d3;
+    line-height: 1.7;
+    margin-bottom: space(10);
+  }
+}
+
+.tigray-map-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(180deg, #1a2240 0%, #0f1322 100%);
+  color: #d6d9e2;
+  text-align: center;
+  padding: 32px;
+  gap: 8px;
+
+  .tigray-map-fallback-eyebrow {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #f4685a;
+    font-weight: 600;
+    margin: 0;
+  }
+  .tigray-map-fallback-place {
+    font-size: 22px;
+    color: #fff;
+    font-weight: 700;
+    margin: 0;
+  }
+  .tigray-map-fallback-note {
+    font-size: 11px;
+    color: #6c7385;
+    margin: 0;
+  }
+}
+
+// ── Stage that holds the map + overlapping media card ───────────────
+.sticky-graphic-stage {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  // The sticky media card is position: absolute and won't affect this flex layout.
+  // The map (.tigray-map) remains the only flow child.
+}
+
+// ── Media citation card — pairs with map for journalism-backed events ───
+.media-card {
+  display: flex;
+  flex-direction: column;
+  background: rgba(15, 19, 34, 0.94);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 2px solid #f4685a;
+  border-radius: 6px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+
+// Desktop-only sticky overlay version — pinned to bottom-left of the map so it doesn't
+// crowd the active-marker labels which typically render to the right of city/region dots.
+.media-card--sticky {
+  position: absolute;
+  left: space(4);
+  bottom: space(4);
+  width: 320px;
+  max-width: calc(100% - #{space(8)});
+  z-index: 4;
+
+  @media (max-width: map-get($breakpoints, md)) {
+    display: none;
+  }
+}
+
+// Mobile-only inline version — flows below the step body
+.media-card--inline {
+  margin-top: space(5);
+  width: 100%;
+
+  @media (min-width: #{map-get($breakpoints, md) + 1px}) {
+    display: none;
+  }
+}
+
+.media-card-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #0f1322;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+.media-card-body {
+  padding: space(4) space(5) space(5);
+  display: flex;
+  flex-direction: column;
+  gap: space(3);
+}
+
+.media-card-meta {
+  display: flex;
+  align-items: center;
+  gap: space(3);
+  font-size: 11px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+}
+
+.media-card-outlet {
+  font-weight: 700;
+  color: #ffffff;
+  padding: 3px 8px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.08);
+
+  &--reuters    { background: #fa6400; }
+  &--bbc        { background: #bb1919; }
+  &--nyt,
+  &--the-new-york-times { background: #ffffff; color: #0a0e1a; font-family: 'Georgia', serif; letter-spacing: 0; text-transform: none; }
+  &--ap         { background: #ff322e; }
+  &--guardian,
+  &--the-guardian { background: #052962; }
+  &--al-jazeera { background: #fa9000; color: #0a0e1a; }
+  &--france24   { background: #00407a; }
+  &--amnesty-international { background: #ffff00; color: #0a0e1a; }
+  &--msf,
+  &--doctors-without-borders { background: #ee0000; }
+  &--the-africa-report { background: #d4af37; color: #0a0e1a; }
+  &--nbc-news,
+  &--nbc { background: #fcb900; color: #0a0e1a; }
+  &--wikipedia { background: #ffffff; color: #0a0e1a; font-family: 'Georgia', serif; letter-spacing: 0; text-transform: none; }
+  &--voice-of-america,
+  &--voa { background: #00529b; }
+  &--nobelprize-org,
+  &--nobelprize { background: #f1c40f; color: #0a0e1a; font-family: 'Georgia', serif; letter-spacing: 0; text-transform: none; }
+  &--un-news,
+  &--un          { background: #4b92db; }
+  &--npr         { background: #ec1c24; }
+}
+
+.media-card-date {
+  color: #8a90a0;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.media-card-headline {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 22px;
+  line-height: 1.28;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.005em;
+
+  @media (max-width: map-get($breakpoints, md)) {
+    font-size: 20px;
+  }
+}
+
+.media-card-link {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: #f4685a;
+  text-decoration: none;
+  align-self: flex-start;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+
+  &:hover, &:focus-visible {
+    color: #ffffff;
+    border-bottom-color: #f4685a;
+  }
+}
+
+.why-tigray-attrib {
+  margin-top: space(10);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.32);
+  letter-spacing: 0.02em;
+
+  a {
+    color: rgba(255, 255, 255, 0.55);
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 255, 255, 0.2);
+
+    &:hover {
+      color: #ffffff;
+    }
+  }
+}
+
+// Optional subtitle that introduces a milestones list ("Life of Zenawi", etc.)
+.step-milestones-title {
+  margin: space(6) 0 space(3);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+  color: #f4685a;
+}
+
+// Step milestones — optional list rendered after step body for entries that need a chronology
+.step-milestones {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: space(2);
+
+  li {
+    position: relative;
+    padding-left: space(5);
+    font-size: 16px;
+    line-height: 1.6;
+    color: #c2c7d3;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.7em;
+      width: 12px;
+      height: 1px;
+      background: rgba(244, 104, 90, 0.55);
+    }
+
+    @media (max-width: map-get($breakpoints, md)) {
+      font-size: 15px;
+      padding-left: space(4);
+    }
+  }
+}
+
+// Why Tigray hides the global site header once the user is past the hero, then offers a
+// floating back-to-top arrow to bring the header back. Toggled via body classes set in
+// the WhyTigray page component.
+body.hide-header-on-scroll .site-header {
+  transition: transform 0.35s ease, opacity 0.25s ease;
+}
+body.site-header-hidden .site-header {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.why-tigray-back-to-top {
+  position: fixed;
+  top: space(5);
+  right: space(5);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(15, 19, 34, 0.85);
+  backdrop-filter: blur(10px);
+  color: #ffffff;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+
+  &:hover, &:focus-visible {
+    transform: translateY(-2px);
+    background: rgba(15, 19, 34, 0.95);
+    border-color: rgba(244, 104, 90, 0.6);
+  }
+
+  @media (max-width: map-get($breakpoints, sm)) {
+    top: space(4);
+    right: space(4);
+    width: 40px;
+    height: 40px;
+  }
+}
+
+// When the header is hidden, the sticky map pins to viewport top — otherwise the 96px gap
+// that was reserved for the header lets step content scroll through behind the map.
+body.site-header-hidden .scrollytelling-graphic {
+  top: 0;
 }

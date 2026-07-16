@@ -20,12 +20,21 @@ export default function Hero() {
                     <p className="hero-subtitle">
                         Providing hope, education, and essential resources to communities in need across Tigray
                     </p>
-                    <div className="hero-cta">
-                        <Link to="/donate" className="btn-primary large">
-                            Donate Now
-                        </Link>
+                    <div className="hero-cta hero-cta--stacked">
                         <Link to="/about" className="btn-secondary large">
                             Learn More
+                        </Link>
+                        <a
+                            href="https://buy.stripe.com/4gMcN784r4262HKfOU3wQ06"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hero-donate-featured"
+                        >
+                            <span className="hero-donate-featured__amt">$5</span>
+                            <span className="hero-donate-featured__label">/mo — Start giving today</span>
+                        </a>
+                        <Link to="/donate" className="hero-donate-more">
+                            Prefer another amount? See all options →
                         </Link>
                     </div>
                 </div>
