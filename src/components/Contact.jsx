@@ -1,4 +1,5 @@
 import React from 'react'
+import classroomPhoto from '../assets/natna-ai-classroom2.jpg'
 
 export default function Contact() {
   return (
@@ -6,16 +7,28 @@ export default function Contact() {
       <div className="container">
         <h2>Get Involved</h2>
         <p>Join our mission to empower communities and create lasting change. Whether you want to volunteer, partner with us, or learn more about our work, we'd love to hear from you.</p>
-        
-        <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
-          <div className="form-row">
-            <input type="text" placeholder="Full Name" required />
-            <input type="email" placeholder="Email Address" required />
-          </div>
-          <input type="text" placeholder="Subject" />
-          <textarea placeholder="Tell us how you'd like to get involved or ask us anything..." rows="5" required />
-          <button className="btn large" type="submit">Send Message</button>
-        </form>
+
+        <button
+          className="btn-primary large"
+          onClick={() => window.location.href = 'mailto:natnachildrensfoundation@gmail.com?subject=Getting%20Involved%20with%20NATNA'}
+        >
+          Send Us an Email
+        </button>
+
+        <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+          <a
+            href="https://www.instagram.com/natnacf/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ig-follow-link"
+          >
+            Instagram — @natnacf
+          </a>
+        </div>
+
+        <div className="contact-hero-image">
+          <img src={classroomPhoto} alt="Students learning in classroom" />
+        </div>
       </div>
     </section>
   )
