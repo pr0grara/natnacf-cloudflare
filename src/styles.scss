@@ -3558,6 +3558,56 @@ html {
   line-height: 1.4;
 }
 
+// One-time Donate button (leads the donate page)
+.dn-once {
+  max-width: 480px;
+  margin: 0 auto space(10);
+  text-align: center;
+
+  &__btn {
+    display: inline-block;
+    min-width: 240px;
+    padding: space(4) space(8);
+    background: color(accent-primary);
+    color: white;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: font-size(lg);
+    font-weight: 700;
+    box-shadow: shadow(md);
+    transition: transform 0.15s ease, background 0.15s ease;
+
+    &:hover {
+      background: color(accent-hover);
+      color: white;
+      transform: translateY(-1px);
+    }
+  }
+
+  &__hint {
+    margin: space(3) 0 0;
+    font-size: font-size(sm);
+    color: color(text-muted);
+  }
+}
+
+.dn-monthly-title {
+  text-align: center;
+  font-size: font-size(xl);
+  margin-bottom: space(4);
+}
+
+.dn-manage {
+  text-align: center;
+  font-size: font-size(sm);
+  color: color(text-muted);
+  margin: 0 auto space(8);
+
+  a {
+    color: color(accent-primary);
+  }
+}
+
 // Stripe pricing table
 .dn-pricing {
   margin-bottom: space(12);

@@ -24,9 +24,14 @@ export default function Hero() {
                         <Link to="/about" className="btn-secondary large">
                             Learn More
                         </Link>
-                        <Link to="/donate" className="hero-donate-featured">
+                        <a
+                            href="https://donate.stripe.com/9B600lesP6ae2HK6ek3wQ07"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hero-donate-featured"
+                        >
                             Donate
-                        </Link>
+                        </a>
                     </div>
                 </div>
                 

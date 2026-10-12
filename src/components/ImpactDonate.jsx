@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 const stats = [
   { number: '500+', label: 'Youth Empowered' },
@@ -30,7 +29,7 @@ export default function ImpactDonate() {
             <h2>Support Our Mission</h2>
             <p className="donate-subtitle">Your contribution directly transforms lives</p>
             <div className="donate-btns">
-              <Link to="/donate" className="donate-amount primary">Donate</Link>
+              <a href="https://donate.stripe.com/9B600lesP6ae2HK6ek3wQ07" className="donate-amount primary" target="_blank" rel="noopener noreferrer">Donate</a>
             </div>
             <p className="donate-tax">Tax-deductible 501(c)(3)</p>
           </div>

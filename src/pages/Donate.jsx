@@ -66,13 +66,37 @@ export default function Donate() {
         </p>
       </div>
 
-      {/* Pricing table */}
+      {/* One-time gift first, then monthly options */}
+      <div className="dn-once">
+        <a
+          href="https://donate.stripe.com/9B600lesP6ae2HK6ek3wQ07"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="dn-once__btn"
+        >
+          Donate
+        </a>
+        <p className="dn-once__hint">One-time gift, any amount.</p>
+      </div>
+
+      <h2 className="dn-monthly-title">Give monthly</h2>
       <div className="dn-pricing">
         <stripe-pricing-table
           pricing-table-id="prctbl_1TIYoIQQkg3V48Jv4koytm1S"
           publishable-key="pk_live_51T65F9QQkg3V48JvfdqFzVDxV3Dd3DfGKPQACXQ0GpSWaaOREXu2eyhSj6FeAnJBv4NLrdBJdchhkozyn50ZjaLC00c3vzOsHH"
         />
       </div>
+
+      <p className="dn-manage">
+        Already giving monthly?{' '}
+        <a
+          href="https://billing.stripe.com/p/login/fZu6oJ1G34264PSeKQ3wQ00"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Manage or cancel your monthly gift
+        </a>
+      </p>
 
       {/* Zelle — right below pricing */}
       <ZelleSection />
