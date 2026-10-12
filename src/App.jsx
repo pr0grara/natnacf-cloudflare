@@ -17,6 +17,7 @@ import Footer from './components/Footer'
 import Portfolio from './components/Portfolio'
 import ProjectNatnaAi from './pages/ProjectNatnaAi'
 import ProjectMutualAid from './pages/ProjectMutualAid'
+import ProjectAshenda from './pages/ProjectAshenda'
 import WhyTigray from './pages/WhyTigray'
 import Updates from './pages/Updates'
 
@@ -32,6 +33,7 @@ export default function App() {
           <Route path="/missions" element={<Portfolio />} />
           <Route path="/projects/natna-ai" element={<ProjectNatnaAi />} />
           <Route path="/projects/mutual-aid" element={<ProjectMutualAid />} />
+          <Route path="/projects/ashenda" element={<ProjectAshenda />} />
           <Route path="/context" element={<WhyTigray />} />
           <Route path="/why-tigray" element={<Navigate to="/context" replace />} />
           <Route path="/updates" element={<Updates />} />

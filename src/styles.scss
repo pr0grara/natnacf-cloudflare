@@ -2855,6 +2855,11 @@ html {
     }
   }
 
+  // Gallery cards put the videos below the text, so the text gets the full width
+  &.has-gallery .aid-left {
+    grid-column: 1 / -1;
+  }
+
   .aid-gallery {
     grid-column: 1 / -1;
     display: grid;
