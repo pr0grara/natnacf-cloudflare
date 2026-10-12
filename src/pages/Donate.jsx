@@ -66,20 +66,6 @@ export default function Donate() {
         </p>
       </div>
 
-      {/* Quick give — $5/month */}
-      <div className="dn-quick-give">
-        <a
-          href="https://buy.stripe.com/4gMcN784r4262HKfOU3wQ06"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="dn-quick-give__btn"
-        >
-          <span className="dn-quick-give__amt">$5</span>
-          <span className="dn-quick-give__label">/ month</span>
-        </a>
-        <p className="dn-quick-give__hint">The easiest way to help — recurring support that adds up.</p>
-      </div>
-
       {/* Pricing table */}
       <div className="dn-pricing">
         <stripe-pricing-table

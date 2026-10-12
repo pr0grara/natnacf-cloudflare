@@ -1759,33 +1759,13 @@ html {
   font-weight: 700;
   box-shadow: shadow(md);
   transition: transform 0.15s ease, background 0.15s ease;
+  font-size: font-size(lg);
   white-space: nowrap;
 
   &:hover {
     background: color(accent-hover);
     color: white;
     transform: translateY(-1px);
-  }
-
-  &__amt {
-    font-size: font-size(lg);
-    line-height: 1;
-  }
-
-  &__label {
-    font-size: font-size(sm);
-    opacity: 0.92;
-  }
-}
-
-.hero-donate-more {
-  font-size: font-size(sm);
-  color: color(text-muted);
-  text-decoration: none;
-  transition: color 0.15s ease;
-
-  &:hover {
-    color: color(accent-primary);
   }
 }
 
@@ -3576,50 +3556,6 @@ html {
   font-size: font-size(xs);
   color: color(text-muted);
   line-height: 1.4;
-}
-
-// Quick-give $5/month button
-.dn-quick-give {
-  max-width: 480px;
-  margin: 0 auto space(8);
-  text-align: center;
-
-  &__btn {
-    display: inline-flex;
-    align-items: baseline;
-    justify-content: center;
-    gap: space(1);
-    padding: space(3) space(6);
-    background: color(accent-primary);
-    color: white;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: 700;
-    box-shadow: shadow(md);
-    transition: transform 0.15s ease, background 0.15s ease;
-    white-space: nowrap;
-
-    &:hover {
-      background: color(accent-hover);
-      transform: translateY(-1px);
-    }
-  }
-
-  &__amt {
-    font-size: font-size(lg);
-    line-height: 1;
-  }
-
-  &__label {
-    font-size: font-size(sm);
-    opacity: 0.9;
-  }
-
-  &__hint {
-    margin: space(4) 0 0;
-    font-size: font-size(sm);
-    color: color(text-muted);
-  }
 }
 
 // Stripe pricing table

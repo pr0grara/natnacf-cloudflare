@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -32,7 +32,8 @@ export default function App() {
           <Route path="/missions" element={<Portfolio />} />
           <Route path="/projects/natna-ai" element={<ProjectNatnaAi />} />
           <Route path="/projects/mutual-aid" element={<ProjectMutualAid />} />
-          <Route path="/why-tigray" element={<WhyTigray />} />
+          <Route path="/context" element={<WhyTigray />} />
+          <Route path="/why-tigray" element={<Navigate to="/context" replace />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/donate" element={<Donate />} />
