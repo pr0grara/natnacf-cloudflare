@@ -56,7 +56,7 @@ export default function ProjectMutualAid() {
         </Link>
 
         <div className="project-header">
-          <h1>Family Mutual Aid Initiative</h1>
+          <h1>Mutual Aid</h1>
           <p className="project-subtitle">
             Direct support to families and communities
             across Tigray.
@@ -147,7 +147,7 @@ export default function ProjectMutualAid() {
           </div>
 
           <div className="project-cta">
-            <h2>Support This Initiative</h2>
+            <h2>Support Mutual Aid</h2>
             <p>
               Your donation provides flour, school supplies,
               sanitary products, and emergency cash to

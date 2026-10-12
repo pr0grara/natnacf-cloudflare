@@ -53,7 +53,7 @@ export default function AboutSection() {
             With critical infrastructure destroyed or looted and access to basic necessities severely limited, survival itself has become a daily struggle. That gap is why mutual aid matters. This is where our work comes in: to help meet immediate needs, creating pathways for individuals to rebuild, thrive, and uplift their communities alongside them.
           </p>
           <div className="about-block-cta">
-            <Link to="/why-tigray" className="btn-primary">Read the full story</Link>
+            <Link to="/context" className="btn-primary">Read the full story</Link>
           </div>
         </div>
 
@@ -72,7 +72,8 @@ export default function AboutSection() {
 
       {/* Team Bios — wider container outside the narrative shell */}
       <div className="team-section">
-        <h2>Our Team</h2>
+        <h2>Stewards</h2>
+        <p className="team-section-sub">Founding members</p>
         <div className="team-grid">
           <div className="team-member team-member--samru">
             <div className="team-photo">

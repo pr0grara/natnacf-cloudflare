@@ -25,17 +25,13 @@ export default function Hero() {
                             Learn More
                         </Link>
                         <a
-                            href="https://buy.stripe.com/4gMcN784r4262HKfOU3wQ06"
+                            href="https://donate.stripe.com/9B600lesP6ae2HK6ek3wQ07"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="hero-donate-featured"
                         >
-                            <span className="hero-donate-featured__amt">$5</span>
-                            <span className="hero-donate-featured__label">/mo — Start giving today</span>
+                            Donate
                         </a>
-                        <Link to="/donate" className="hero-donate-more">
-                            Prefer another amount? See all options →
-                        </Link>
                     </div>
                 </div>
                 
