@@ -19,7 +19,7 @@ export default function ProjectAshenda() {
         <div className="project-header">
           <h1>Ashenda</h1>
           <p className="project-subtitle">
-            Celebrating the girls and young women of Tigray.
+            Celebrating the girls and women of Tigray.
           </p>
         </div>
 
@@ -51,7 +51,7 @@ export default function ProjectAshenda() {
                   Samru challenged our community to sponsor girls living in IDP camps within
                   Tigray: 5,000 birr, about $33, covers one girl's traditional dress and hair.
                   Our community met the challenge. With the funds raised, we bought fabric and
-                  had Ashenda dresses made for the young girls and women in the camps, so each
+                  had Ashenda dresses made for the girls and women in the camps, so each
                   of them could celebrate knowing she is seen, celebrated, and cared for.
                 </p>
               </div>
