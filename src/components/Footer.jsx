@@ -12,10 +12,11 @@ export default function Footer() {
           </div>
           <nav className="footer-nav">
             <Link to="/">Home</Link>
-            <Link to="/about">About</Link>
-            <Link to="/missions">Programs</Link>
-            <Link to="/contact">Contact</Link>
+            <Link to="/missions">Programs & Projects</Link>
             <Link to="/donate">Donate</Link>
+            <Link to="/about">About Us</Link>
+            <Link to="/context">Context</Link>
+            <Link to="/contact">Contact Us</Link>
             <a
               href="https://www.instagram.com/natnacf/"
               target="_blank"

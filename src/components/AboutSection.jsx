@@ -73,6 +73,7 @@ export default function AboutSection() {
       {/* Team Bios — wider container outside the narrative shell */}
       <div className="team-section">
         <h2>Stewards</h2>
+        <p className="team-section-sub">Founding members</p>
         <div className="team-grid">
           <div className="team-member team-member--samru">
             <div className="team-photo">

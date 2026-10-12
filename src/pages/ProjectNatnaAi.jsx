@@ -101,7 +101,7 @@ export default function ProjectNatnaAi() {
           </div>
           
           <div className="project-cta">
-            <h2>Support This Project</h2>
+            <h2>Support NATNA AI</h2>
             <p>Your donation helps us deploy NATNA AI to more communities, train local facilitators, and continue developing this technology.</p>
             <Link to="/donate" className="btn-primary large">Donate Now</Link>
           </div>

@@ -147,7 +147,7 @@ export default function ProjectMutualAid() {
           </div>
 
           <div className="project-cta">
-            <h2>Support This Initiative</h2>
+            <h2>Support Mutual Aid</h2>
             <p>
               Your donation provides flour, school supplies,
               sanitary products, and emergency cash to
