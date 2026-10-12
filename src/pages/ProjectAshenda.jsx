@@ -46,10 +46,11 @@ export default function ProjectAshenda() {
                   <span className="aid-stat-number">5,000 birr</span>
                   <span className="aid-stat-label">($33) dresses one girl for Ashenda</span>
                 </div>
-                <h3>The #AshendaChallenge5000</h3>
+                <h3>The Ashenda Challenge</h3>
                 <p>
-                  Samru challenged our community to sponsor girls living in IDP camps within
-                  Tigray: 5,000 birr, about $33, covers one girl's traditional dress and hair.
+                  With #AshendaChallenge5000, Samru challenged our community to sponsor girls
+                  living in IDP camps within Tigray: 5,000 birr, about $33, covers one girl's
+                  traditional dress and hair.
                   Our community met the challenge. With the funds raised, we bought fabric and
                   had Ashenda dresses made for the girls and women in the camps, so each
                   of them could celebrate knowing she is seen, celebrated, and cared for.

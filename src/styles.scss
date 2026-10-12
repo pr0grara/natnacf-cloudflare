@@ -2837,6 +2837,15 @@ html {
   background: color(secondary-bg);
   border-radius: 16px;
 
+  // Let grid items shrink below their longest word (e.g. #AshendaChallenge5000) on phones
+  > * {
+    min-width: 0;
+  }
+
+  h3 {
+    overflow-wrap: anywhere;
+  }
+
   &:nth-child(even) {
     direction: rtl;
 
