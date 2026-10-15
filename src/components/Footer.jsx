@@ -9,6 +9,7 @@ export default function Footer() {
         <div className="footer-inner">
           <div className="footer-left">
             <p>© {new Date().getFullYear()} NATNA Children's Foundation</p>
+            <p className="footer-tax">A registered 501(c)(3) nonprofit. All donations are tax&#8209;deductible.</p>
           </div>
           <nav className="footer-nav">
             <Link to="/">Home</Link>
