@@ -935,6 +935,11 @@ p {
     }
   }
   
+  .portfolio-tagline {
+    color: color(text-primary);
+    font-weight: 600;
+  }
+
   p {
     color: color(text-secondary);
     font-size: font-size(md);
@@ -1364,6 +1369,10 @@ p {
     flex-wrap: wrap;
     justify-content: center;
     gap: space(2) space(4);
+  }
+
+  .footer-tax {
+    margin-top: space(1);
   }
 
   p {

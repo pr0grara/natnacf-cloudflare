@@ -67,7 +67,7 @@ export default function ProjectAshenda() {
           </div>
 
           <div className="project-cta">
-            <h2>Support Psychosocial Programs</h2>
+            <h2>Support Mental Health & Community Building</h2>
             <p>
               Your donation helps create safe, joyful spaces for children and young people
               recovering from conflict and displacement.
