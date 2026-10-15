@@ -34,7 +34,7 @@ const items = [
     },
     {
       id: 3,
-      title: 'Psychosocial & Extracurricular',
+      title: 'Mental Health & Community Building',
       tagline: 'Wellbeing isn\u2019t just survival, it\u2019s confidence, friendships, and joy.',
       desc: [
         'Safe spaces for creative expression, art, sports, and leadership workshops.',
